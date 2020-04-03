@@ -43,7 +43,8 @@ function performanceData(){
     return new Promise(async(resolve,reject)=>{
         const osType = os.type();
         const osCPUinfoObj = os.cpus(); //returns array of infor for each logical CPU core (I have 16, since 8 cores)
-        const osCPUNumCores = osCPUinfoObj.length;
+        const osCPUNumThreads = osCPUinfoObj.length;
+        const osCPUNumCores = osCPUNumThreads/2;
         const osCPUModel = osCPUinfoObj[0].model; //all will be the same model
         const osCPUSpeed = osCPUinfoObj[0].speed;
         const osUpTime = os.uptime();
@@ -58,6 +59,7 @@ function performanceData(){
             osType,
             osCPUModel,
             osCPUNumCores,
+            osCPUNumThreads,
             osCPUSpeed,
             cpuLoad,
             osUpTime,
