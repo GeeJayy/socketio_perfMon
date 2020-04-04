@@ -11,7 +11,8 @@
 // IMPORTS
 //*********************************************** */
 const os = require('os');
-
+const io = require('socket.io-client');
+let socket = io('http://localhost:8181'); //PORT FOR Socket.io Server (MASTER) 
 
 //*********************************************** */
 // SYSTEM DATA INFORMATION
@@ -34,7 +35,9 @@ const os = require('os');
 //*********************************************** */
 // FUNCTIONS
 //*********************************************** */
-
+socket.on('connect',()=>{
+    console.log('Connected to Socket Server');
+});
 
 //*********************************************** */
 //Use the OS CPU times object to compute the real-time load for each mode the CPU is in:

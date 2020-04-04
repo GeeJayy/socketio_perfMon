@@ -1,5 +1,5 @@
 //*********************************************** */
-// Socket.io Server services both node & react clients
+// Socket Module for all workers 
 //
 // Req:
 //  -farmhash (google's hashing algorithms)
@@ -18,3 +18,9 @@
 //*********************************************** */
 //
 //*********************************************** */
+function socketMain(ioServer, socket){
+    console.log("Socket Connected: ")//, socket.id
+
+}
+
+module.exports = socketMain;
