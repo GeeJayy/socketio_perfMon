@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import socket from './util/socketConnection';
+
 
 function App() {
+
+  const [perfData, setPerfData] = useState({});
+
+  useEffect(()=>{
+    //***************************************** */
+    //WHEN SOCKET RECEIVES DATA UPDATE STATE
+    socket.on('data',(data)=>{
+      console.log('Data Received: ', data);
+      setPerfData(data);
+    });
+  },[]);//When Component Mounts
+
   return (
     <div className="App">
       <header className="App-header">

@@ -41,12 +41,12 @@ socket.on('connect',()=>{
     console.log('Connected to Socket Server');
 
     const networkInterface = os.networkInterfaces();
-    let MACadress;
+    let MACaddress;
     //Loop thru interfaces to find INTERNAL = FALSE
     for(let key in networkInterface){
         //CHECK IF INTERNAL PROPERTY IS FALSE
         if(!key[0].interal){
-            MACadress = networkInterface[key][0].mac //MAC address of external Net. Int.
+            MACaddress = networkInterface[key][0].mac //MAC address of external Net. Int.
             break; //only need one network interface per machine
         }
         else{
@@ -55,20 +55,33 @@ socket.on('connect',()=>{
 
     }
 
+
+    //*********************************************** */
     //AUTHENTICATION: CLient auth with single key/valu
     socket.emit('clientAuth','q345bqv34b5q347nq47yq45bq34q3')
 
+
+    //*********************************************** */
+    //INIT PERF DATA:
+    performanceData().then((allPerfData)=>{
+        allPerfData.MACaddress = MACaddress; //APPEND MAC ADDRESS FOR FIRST CHECK
+        socket.emit('initPerfData',allPerfData); //Send over all perf data on init
+    })
+
+
+    //*********************************************** */
+    //PERF DATA EVERY SECOND:
     let perfDataInterval = setInterval(()=>{
         performanceData().then((allPerfData) =>{
             //console.log("performance Data: ", allPerfData);
             socket.emit('perfData',allPerfData); //NEED TO APPEND MAC ADDRESS
-        })
+        });
     },1000); //run every one second
 
     //IF THE SOCKET DISCONNECTS, CLEAR THE INTERVAL, SO WHEN RECONNECTS IT IS DUPLICATED
     socket.on('disconnect',()=>{
         clearInterval(perfDataInterval);
-    })
+    });
 
 });
 
@@ -77,32 +90,32 @@ socket.on('connect',()=>{
 //Need average of all the cores -> full CPU Average
 function performanceData(){
     return new Promise(async(resolve,reject)=>{
-        const osType = os.type();
-        const osCPUinfoObj = os.cpus(); //returns array of infor for each logical CPU core (I have 16, since 8 cores)
-        const osCPUNumThreads = osCPUinfoObj.length;
-        const osCPUNumCores = osCPUNumThreads/2;
-        const osCPUModel = osCPUinfoObj[0].model; //all will be the same model
-        const osCPUSpeed = osCPUinfoObj[0].speed;
-        const osUpTime = os.uptime();
-        const osFreeMem = os.freemem();
-        const osTotalMem = os.totalmem();
-        const osUsedMem = osTotalMem - osFreeMem;
-        const osMemUsage = Math.floor(osUsedMem/osTotalMem*100) //usedmem/totalmem
+        const OS_Type = os.type();
+        const CPU_INFO = os.cpus(); //returns array of infor for each logical CPU core (I have 16, since 8 cores)
+        const CPU_Threads = CPU_INFO.length;
+        const CPU_Cores = CPU_Threads/2;
+        const CPU_Model = CPU_INFO[0].model; //all will be the same model
+        const CPU_Speed = CPU_INFO[0].speed;
+        const OS_UpTime = os.uptime();
+        const OS_FreeMem = os.freemem();
+        const OS_TotalMem = os.totalmem();
+        const OS_UsedMem = OS_TotalMem - OS_FreeMem;
+        const OS_MemUsage = Math.floor(OS_UsedMem/OS_TotalMem*100) //usedmem/totalmem
     
-        const cpuLoad = await getCPUload();
+        const CPU_Load = await getCPUload();
 
         resolve({
-            osType,
-            osCPUModel,
-            osCPUNumCores,
-            osCPUNumThreads,
-            osCPUSpeed,
-            cpuLoad,
-            osUpTime,
-            osFreeMem,
-            osTotalMem,
-            osUsedMem,
-            osMemUsage,
+            OS_Type,
+            OS_UpTime,
+            CPU_Model,
+            CPU_Speed,
+            CPU_Cores,
+            CPU_Threads,
+            CPU_Load,
+            OS_TotalMem,
+            OS_FreeMem,
+            OS_UsedMem,
+            OS_MemUsage
         });
 
     });
