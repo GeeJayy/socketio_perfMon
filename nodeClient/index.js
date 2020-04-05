@@ -33,10 +33,43 @@ let socket = io('http://localhost:8181'); //PORT FOR Socket.io Server (MASTER)
 
 
 //*********************************************** */
-// FUNCTIONS
+// SOCKET CONNECTION & EMITTINGS
 //*********************************************** */
+//Need a way to ID this client to whoever is concerned (Cant us IP*)
+//USE NETWORK INTERFACES (MAC ADDRESS - EXTERNAL), LOOP THRU PROPS TILL INTERNAL = false
 socket.on('connect',()=>{
     console.log('Connected to Socket Server');
+
+    const networkInterface = os.networkInterfaces();
+    let MACadress;
+    //Loop thru interfaces to find INTERNAL = FALSE
+    for(let key in networkInterface){
+        //CHECK IF INTERNAL PROPERTY IS FALSE
+        if(!key[0].interal){
+            MACadress = networkInterface[key][0].mac //MAC address of external Net. Int.
+            break; //only need one network interface per machine
+        }
+        else{
+            console.log("Machine not connected to Internet");
+        }
+
+    }
+
+    //AUTHENTICATION: CLient auth with single key/valu
+    socket.emit('clientAuth','q345bqv34b5q347nq47yq45bq34q3')
+
+    let perfDataInterval = setInterval(()=>{
+        performanceData().then((allPerfData) =>{
+            //console.log("performance Data: ", allPerfData);
+            socket.emit('perfData',allPerfData); //NEED TO APPEND MAC ADDRESS
+        })
+    },1000); //run every one second
+
+    //IF THE SOCKET DISCONNECTS, CLEAR THE INTERVAL, SO WHEN RECONNECTS IT IS DUPLICATED
+    socket.on('disconnect',()=>{
+        clearInterval(perfDataInterval);
+    })
+
 });
 
 //*********************************************** */
@@ -147,6 +180,3 @@ function getCPUload(){
 
 // console.log('***********************************************');
 // console.log('***********************************************');
-performanceData().then((allPerfData) =>{
-    console.log("performance Data: ", allPerfData);
-})

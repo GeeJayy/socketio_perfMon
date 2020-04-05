@@ -115,7 +115,10 @@ else {
 	io.adapter(io_redis({ host: 'localhost', port: 6379 }));
 
     // Here you might use Socket.IO middleware for authorization etc.
-	// on connection, send the socket over to our module with socket stuff
+    // on connection, send the socket over to our module with socket stuff
+    /****************************************************************** */
+    // MAIN SOCKET STUFF IN THE SOCKET MAIN
+    /****************************************************************** */
     io.on('connection', function(socket) {
         //call socketMain on the server and the socket that just connected
 		socketMain(io,socket);
