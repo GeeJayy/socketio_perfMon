@@ -50,7 +50,7 @@ function socketMain(ioServer, socket){
             socket.disconnect(true);
         }
 
-    });
+    }); 
 
     //*********************************************** */
     //RUN WHEN NEW CLIENT CONNECTS FIRST TIME:

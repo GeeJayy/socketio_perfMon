@@ -74,6 +74,7 @@ socket.on('connect',()=>{
     let perfDataInterval = setInterval(()=>{
         performanceData().then((allPerfData) =>{
             //console.log("performance Data: ", allPerfData);
+            allPerfData.MACaddress = MACaddress; //APPEND MAC ADDRESS FOR FIRST CHECK
             socket.emit('perfData',allPerfData); //NEED TO APPEND MAC ADDRESS
         });
     },1000); //run every one second
