@@ -11,7 +11,7 @@
     outline: inset;
     overflow: visible;
     background-color: rgb(51, 51, 51);
-    color:rgb(10, 78, 100)
+    color:rgb(0, 136, 254)
 }
 
 .InfChContainer{
@@ -25,18 +25,21 @@
     overflow: visible;
     
 }
+.item{
+    color:rgb(255, 187, 40);
+}
 
 .LineChartDiv{
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: top;
     margin: 10px 10px 10px 10px; 
     border-style: double;
     outline: inset;
     overflow: visible;
-    color:rgb(10, 78, 100);
+    color:rgb(0, 136, 254);
     height: 485px;
     width: 800px;
 }
@@ -45,15 +48,15 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    /* justify-content: center; */
-    padding: 10px, 10px, 10px, 10px;
+    align-items: center;
+    justify-content: center;
+    /* padding: 10px, 10px, 10px, 10px; */
     margin: 10px 10px 10px 10px;
     border-style: double;
     outline: inset;
     overflow: hidden;
     width:275px;
     height:485px;
-    color:rgb(10, 78, 100)
+    color:rgb(0, 136, 254)
 }
 

@@ -18,7 +18,7 @@ function InfoWidget(props){
             <h1>Connected Machine Info</h1>
             <p>MAC Address: {props.data['MAC_Address']}</p>
             <p>OS Type: {props.data['OS_Type']}</p>
-            <p>OS Up Time: {props.data['OS_UpTime']}</p>
+            <p>OS Up Time: {props.data['OS_UpTime']} seconds</p>
         </div>
 
 

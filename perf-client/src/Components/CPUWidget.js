@@ -7,39 +7,23 @@
 // IMPORTS
 //*********************************************** */
 import React, { useEffect, useState } from "react";
-import {XYPlot, LineSeries, VerticalGridLines, HorizontalGridLines,XAxis,YAxis} from 'react-vis';
-import {RadialChart}from 'react-vis';
-
+import {PieChart, Pie, Sector, Cell, Legend,Tooltip} from 'recharts';
 import './CPUStyles.css'
-import 'react-vis/dist/style.css';
+
 
 function CPUWidget(props){
     const [state, setState] = useState({});
-    const [CPUData, setCPUData] = useState([{x:0,y:0}]);
-    const [index, setIndex] = useState(1);
-    const [reset, setReset] = useState(false);
-    const [CPUPie, setCPUPie] = useState([{angle:0,label:'CPU Used'},{angle:100, label:'CPU Available'}])
+    const [CPUData, setCPUData] = useState([{name:'CPU Load',value:10},{name: 'CPU Available',value:90}]);
     // const configuredCurve = d3Shape.curveCatmullRom.alpha(0.5);
+    const COLORS = [ '#FFBB28', '#0088FE'];//'#0088FE', '#00C49F',
+    var dataFormat = 
     //NEW PROPS
     useEffect(()=>{
-        let yData = props.data['CPU_Load'] ? props.data['CPU_Load'] : 0 //DONT ALLOW UNDEFINED VALUES
-        let newData = {x:index%100, y: yData}
-        setCPUData(CPUData.concat(newData));
-        setIndex(index+1); //CHANGE THIS TO TIME STAMP:
-        if((index % 100 == 0)){
-            console.log('true')
-            // setReset(true)
-            setCPUData([{x:0,y:0}])
-        }
-        setCPUPie([{angle:props.data['CPU_Load'],label:'CPU Used'},{angle:100-props.data['CPU_Load'], label:'CPU Available'}])
+        let temp = props.data['CPU_Load'] ? props.data['CPU_Load'] : 0
+        setCPUData([{name:'CPU Load',value: temp},{name: 'CPU Available',value:100-temp}])
+       
     },[props]);
 
-    //
-    // useEffect(()=>{
-    //     // console.log("RUN")
-    //     setCPUData([{x:0,y:0}])
-
-    // },[reset])
 
 
     return(
@@ -49,46 +33,42 @@ function CPUWidget(props){
 
             
                 <div className = {'CPUInfo'}>
-                    <h3>CPU Model: {props.data['CPU_Model']}</h3>
-                    <h3>CPU Speed: {props.data['CPU_Speed']} GHz</h3>
-                    <h3>CPU Cores: {props.data['CPU_Cores']}</h3>
-                    <h3>CPU Threads: {props.data['CPU_Threads']}</h3>
+                    <h3>CPU Model: <p className = "item">{props.data['CPU_Model']}</p></h3>
+                    <h3>CPU Speed: <p className = "item">{`${props.data['CPU_Speed']} GHz`}  </p></h3>
+                    <h3>CPU Cores: <p className = "item">{props.data['CPU_Cores']}</p></h3>
+                    <h3>CPU Threads: <p className = "item" >{props.data['CPU_Threads']}</p></h3>
 
                 </div>
 
                 <div className = {'LineChartDiv'}>
-                <h1>Real-Time CPU Load</h1>
-                    {/* <XYPlot
-                        height = {400}
-                        width = {800}
-                        colorType="linear"
-                        colorDomain={[0, 9]}
-                        colorRange={['yellow', 'orange']}
+                    <h1>Real-Time CPU Load</h1>
+                    <PieChart
+                        width={800}
+                        height={800}
                     >
-                        <LineSeries
+                        <Pie
                             data = {CPUData}
-                            style={{strokeLinejoin: "round"}}
-                            
+                            cx = {400}
+                            cy = {185}
+                            labelLine = {true}
+                            outerRadius = {180}
+                            fill="#8884d8"
+                            dataKey="value"
+                            label = {true}
+                        >
+
+                            {
+                                CPUData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                            }
+                        </Pie>
+
+                        <Legend
+                            verticalAlign="top"
+                            height={0}
+                            iconType = {'square'}
                         />
-                        <VerticalGridLines />
-                        <HorizontalGridLines />
-                        <XAxis
-                            tickValues={[...Array(100).keys()]}
-                            tickFormat={v => v}
-                        />
-                        <YAxis />
-                    </XYPlot> */}
-                    <RadialChart
-                        data = {CPUPie}
-                        labelsRadiusMultiplier={1.1}
-                        labelsStyle={{
-                          fontSize: 12
-                        }}
-                        //showLabels
-                        animation
-                        width= {800}
-                        height = {400}
-                    />
+                        {/* <Tooltip /> */}
+                    </PieChart>
 
                 </div>
             </div>
