@@ -30,17 +30,17 @@ function App() {
   const Widget  = (data) =>{
     let keys = Object.keys(data)[0];
     let sData = {...data};
-    let formatData = {};
+    let formattedData = {};
     Object.entries(sData).map((d,k)=>{
-      console.log("D: ", d[1]);
-      console.log('k: ', k)
-      formatData = d[1];
+      // console.log("D: ", d[1]);
+      // console.log('k: ', k)
+      formattedData = d[1];
     });
     //let vals = Object.values(data)[0];
     //console.log("CPU CORES 1: ", data.CPU_Cores);
     return <PerfWidget
               keyVal = {keys}
-              data = {formatData}
+              data = {formattedData}
               // CPUCores = {...data["CPU_Cores"]}
             />
   }

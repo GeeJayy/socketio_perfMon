@@ -19,7 +19,7 @@ function PerfWidget(props){
     useEffect(()=>{
         setKeyVal(props.keyVal);
         setData(props.data);
-        console.log("Props Data: ", props.data["CPU_Load"]);  
+        //console.log("Props Data: ", props.data["CPU_Load"]);  
 
         
     },[props]);
@@ -37,22 +37,19 @@ function PerfWidget(props){
         <>
     
             <h1>Main Widget</h1>
-            {/* props.keyVal*/}
-            {/* props.data[props.keyVal] */}
-            {/* {console.log("Key Received: ", props.keyVal)} */}
-            {/* { props.data === {} ? console.log("Data Received: ", props.data[props.keyVal]) : console.log('nodata') }*/}
-            {/* {data === null ? console.log("No Data") : LOG(data,keyVal)} */}
-            <CPUWidget>
+           
+            <InfoWidget
+                data = {props.data}
+            />
+           
+            <CPUWidget
+                data = {props.data}
+            />
             
-            </CPUWidget>
-            
-            <MemWidget>
+            <MemWidget
+                data = {props.data}
+            />
 
-            </MemWidget>
-
-            <InfoWidget>
-
-            </InfoWidget>
         </>
  
     );

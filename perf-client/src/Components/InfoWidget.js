@@ -15,7 +15,10 @@ function InfoWidget(props){
 
     return(
         <div>
-            <h1>OS/CPU Info Widget</h1>
+            <h1>Connected Machine Info</h1>
+            <p>MAC Address: {props.data['MAC_Address']}</p>
+            <p>OS Type: {props.data['OS_Type']}</p>
+            <p>OS Up Time: {props.data['OS_UpTime']}</p>
         </div>
 
 
