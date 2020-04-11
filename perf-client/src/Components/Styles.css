@@ -1,5 +1,5 @@
 
-.CPUContainer{
+.Container{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
     color:rgb(0, 136, 254)
 }
 
-.InfChContainer{
+.SecondContainer{
     position: relative;
     display: flex;
     flex-direction: row;
@@ -25,11 +25,21 @@
     overflow: visible;
     
 }
+
+.ThirdContainer{
+    position: relative;
+    display: contents;
+}
+
+.widgetTitle{
+    color:cornsilk
+}
+
 .item{
     color:rgb(255, 187, 40);
 }
 
-.LineChartDiv{
+.ReChartDiv{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -44,7 +54,7 @@
     width: 800px;
 }
 
-.CPUInfo{
+.Info{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -60,3 +70,6 @@
     color:rgb(0, 136, 254)
 }
 
+.toolTip{
+    color: rgb(0, 108, 116);
+}

@@ -35,15 +35,14 @@ function PerfWidget(props){
 
     return(
         <>
-    
-            <h1>Main Widget</h1>
-           
             <InfoWidget
                 data = {props.data}
+                mac = {props.keyVal}
             />
            
             <CPUWidget
                 data = {props.data}
+                
             />
             
             <MemWidget

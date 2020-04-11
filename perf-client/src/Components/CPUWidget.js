@@ -8,7 +8,7 @@
 //*********************************************** */
 import React, { useEffect, useState } from "react";
 import {PieChart, Pie, Sector, Cell, Legend,Tooltip} from 'recharts';
-import './CPUStyles.css'
+import './Styles.css'
 
 
 function CPUWidget(props){
@@ -27,12 +27,12 @@ function CPUWidget(props){
 
 
     return(
-        <div className = {'CPUContainer'}>
-            <h1>CPU Widget</h1>
-            <div className = {'InfChContainer'}>
+        <div className = {'Container'}>
+            <h1 className="widgetTitle">CPU Data</h1>
+            <div className = {'SecondContainer'}>
 
             
-                <div className = {'CPUInfo'}>
+                <div className = {'Info'}>
                     <h3>CPU Model: <p className = "item">{props.data['CPU_Model']}</p></h3>
                     <h3>CPU Speed: <p className = "item">{`${props.data['CPU_Speed']} GHz`}  </p></h3>
                     <h3>CPU Cores: <p className = "item">{props.data['CPU_Cores']}</p></h3>
@@ -40,11 +40,11 @@ function CPUWidget(props){
 
                 </div>
 
-                <div className = {'LineChartDiv'}>
-                    <h1>Real-Time CPU Load</h1>
+                <div className = {'ReChartDiv'}>
+                    {/* <h1>Real-Time CPU Load</h1> */}
                     <PieChart
                         width={800}
-                        height={800}
+                        height={400}
                     >
                         <Pie
                             data = {CPUData}
@@ -60,6 +60,7 @@ function CPUWidget(props){
                             {
                                 CPUData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
                             }
+
                         </Pie>
 
                         <Legend
