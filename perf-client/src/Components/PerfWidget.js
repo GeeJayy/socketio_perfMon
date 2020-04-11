@@ -14,14 +14,16 @@ import InfoWidget from './InfoWidget';
 function PerfWidget(props){
     const [keyVal, setKeyVal] = useState();
     const [data, setData] = useState(null);
+    const [CPULoad, setCPULoad] = useState(null);
 
     useEffect(()=>{
         setKeyVal(props.keyVal);
         setData(props.data);
+        console.log("Props Data: ", props.data["CPU_Load"]);  
 
-        LOG(data,keyVal)
+        
     },[props]);
-
+    
 
     const LOG = (data, key, param) => {
 
