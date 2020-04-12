@@ -41,18 +41,13 @@ function App() {
               // CPUCores = {...data["CPU_Cores"]}
             />
   }
-  
+    //TODO*** ADD A RENDER OF WIDGETS FOR EACH MAC ADDRESS, USING MAC ADDRESS AS COMPONENT KEY
  //***************************************** */ 
  //
  //***************************************** */
   return (
       <div className="App">
-        {/* {console.log('PerfData: ', perfData)} */}
-        {/* 
-        <PerfWidget
-          key = {key}
-          data = {perfData}
-        /> */}
+
         {Widget(perfData)}
 
       </div>

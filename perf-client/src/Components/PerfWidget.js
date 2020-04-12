@@ -14,7 +14,6 @@ import InfoWidget from './InfoWidget';
 function PerfWidget(props){
     const [keyVal, setKeyVal] = useState();
     const [data, setData] = useState(null);
-    const [CPULoad, setCPULoad] = useState(null);
 
     useEffect(()=>{
         setKeyVal(props.keyVal);
@@ -24,14 +23,6 @@ function PerfWidget(props){
         
     },[props]);
     
-
-    const LOG = (data, key, param) => {
-
-        console.log('LOG: ', data[key]);
-        // return <p> `${data[key]}` </p>
-    };
-
-
 
     return(
         <div className="widgetWrapper">
