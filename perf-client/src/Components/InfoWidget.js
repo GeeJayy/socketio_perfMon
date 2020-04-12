@@ -15,7 +15,7 @@ function InfoWidget(props){
 
     return(
         <div className="Container">
-            <h1 className="widgetTitle">Connected Machine Info</h1>
+            <h1 className="widgetTitle">Machine Info</h1>
             <div className = "ThirdContainer">
                 <h3 className = "hTitle">MAC Address: <p className = "item">{props.mac}</p></h3>
                 <h3 className = "hTitle">OS Type: <p className = "item">{props.data['OS_Type']}</p></h3>

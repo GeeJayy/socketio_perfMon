@@ -28,7 +28,11 @@
 
 .ThirdContainer{
     position: relative;
-    display: contents;
+    display: flex;
+    flex-direction: column;
+    height:510px;
+    width:300px;
+    
 }
 
 .widgetTitle{
@@ -51,7 +55,7 @@
     overflow: visible;
     color:rgb(0, 136, 254);
     height: 485px;
-    width: 800px;
+    width: 400px;
 }
 
 .Info{

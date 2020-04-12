@@ -34,7 +34,7 @@ function PerfWidget(props){
 
 
     return(
-        <>
+        <div className="widgetWrapper">
             <InfoWidget
                 data = {props.data}
                 mac = {props.keyVal}
@@ -42,14 +42,13 @@ function PerfWidget(props){
            
             <CPUWidget
                 data = {props.data}
-                
             />
             
             <MemWidget
                 data = {props.data}
             />
 
-        </>
+        </div>
  
     );
 
