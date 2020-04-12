@@ -1,6 +1,9 @@
-# Socket.io Basic Prototype Chatroom
+# Socket.io Prototype for System Performance Monitor
 
-Sample socketIO-based Performance Monitor, built following Robert Bunch's overview of socket.io version2
+Sample socketIO-based Performance Monitor, built following Robert Bunch's overview of socket.io version2.
+    - Scaling with Node Cluster
+        - N systems may join and be monitored simultaneously
+    - Redis for Pub/Sub messaging to all threads
 
 ## Getting Started
 
