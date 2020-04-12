@@ -11,6 +11,7 @@ Sample socketIO-based Performance Monitor, built following Robert Bunch's overvi
 - Npm install *Each Folder* (nodeClient, perf-Client, server)
 - In */server* => run Nodemon server.js (defaults to port 8181)
 - In */nodeClient* => run Nodemon index.js (client connects to socket server)
+- In */perf-client* => npm run start (localhost:3000 default)
 
 ### Prerequisites
 
